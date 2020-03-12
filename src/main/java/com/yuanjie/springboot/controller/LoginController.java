@@ -1,9 +1,13 @@
 package com.yuanjie.springboot.controller;
 
+import com.yuanjie.springboot.common.HttpResult;
 import com.yuanjie.springboot.properties.StudentProperties;
+import com.yuanjie.springboot.vo.LoginVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  *
@@ -19,5 +23,15 @@ public class LoginController {
     @GetMapping(value = "/hello")
     public StudentProperties hello() {
         return studentProperties;
+    }
+
+    // 添加 @Valid 注解，代表此对象使用了参数校验,
+    // BindingResult 参数校验的结果会存储在此对象中，可以根据属性判断是否校验通过，校验不通过可以将错误信息打印出来。
+    @PostMapping(value = "/login")
+    public HttpResult login(@Valid LoginVo lv, BindingResult result) {
+        if(result.hasErrors()) {
+            return new HttpResult("-1", result);
+        }
+        return new HttpResult("0","接收反馈信息成功");
     }
 }
