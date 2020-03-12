@@ -1,4 +1,4 @@
-package com.yuanjie.springboot.bean;
+package com.yuanjie.springboot.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

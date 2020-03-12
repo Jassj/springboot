@@ -1,13 +1,25 @@
 #server configuration (ServerProperties)
 server:
-  port: 8082 # 默认端口8080
+  port: 8082 #默认端口8080
   servlet:
-    context-path: /springboot # 应用的上下文路径、项目路径, 默认/
+    context-path: /springboot #应用的上下文路径、项目路径, 默认/
 
 #customized properties
 student:
   name: 曜
   age: 20
+  sex: true
+  birthday: 1996/07/25 # yyyy/MM/dd
+  location: #{province: jiangsu, city: suzhou} #行内写法
+    province: 江苏
+    city: 苏州
+    zone: 相城
+  hobbies: #字符串可以加引号、单引号、双引号标识，只有双引号支持转义字符
+    - "电\t影"
+    - 音乐
+  skills: #[编程, P图] #行内写法
+    - 编程
+    - P图
 
 #spring configuration
 spring:
@@ -22,3 +34,6 @@ spring:
     show-sql: true   #Show or not log for each sql query
     hibernate:       #Hibernate ddl auto(create, create-drop, update)
       ddl-auto: update
+
+#打开debug日志
+#debug: true
