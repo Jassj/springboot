@@ -3,10 +3,10 @@ package com.yuanjie.springboot.controller;
 import com.yuanjie.springboot.common.HttpResult;
 import com.yuanjie.springboot.properties.StudentProperties;
 import com.yuanjie.springboot.vo.LoginVo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.validation.Valid;
 
 /**
@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @RestController
 public class LoginController {
 
-    @Autowired
+    @Resource
     private StudentProperties studentProperties;
 
     @GetMapping(value = "/hello")

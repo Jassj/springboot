@@ -6,8 +6,10 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 
-// JSR 是一个规范文档，指定了一整套 API，通过标注给对象属性添加约束。Hibernate Validator 就是 JSR 规范的具体实现，
-// Hibernate Validator 提供了 JSR 规范中所有内置约束注解的实现，以及一些附加的约束注解，除此之外用户还可以自定义约束注解。
+/**
+ * JSR 是一个规范文档，指定了一整套 API，通过标注给对象属性添加约束。Hibernate Validator 就是 JSR 规范的具体实现，
+ * Hibernate Validator 提供了 JSR 规范中所有内置约束注解的实现，以及一些附加的约束注解，除此之外用户还可以自定义约束注解。
+ */
 public class LoginVo {
 
     // username用户名校验
