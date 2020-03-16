@@ -1,4 +1,4 @@
-package com.yuanjie.springboot.common;
+package com.yuanjie.springboot.modules.response;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;

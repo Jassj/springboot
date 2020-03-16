@@ -1,6 +1,6 @@
 package com.yuanjie.springboot;
 
-import com.yuanjie.springboot.controller.LoginController;
+import com.yuanjie.springboot.modules.controller.LoginController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

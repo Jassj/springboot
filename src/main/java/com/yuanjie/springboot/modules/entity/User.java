@@ -1,7 +1,8 @@
-package com.yuanjie.springboot.model;
+package com.yuanjie.springboot.modules.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * description: 用户实体类

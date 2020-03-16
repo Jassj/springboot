@@ -1,4 +1,4 @@
-package com.yuanjie.springboot.vo;
+package com.yuanjie.springboot.modules.vo;
 
 import org.hibernate.validator.constraints.Length;
 

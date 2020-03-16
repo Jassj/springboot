@@ -1,8 +1,8 @@
-package com.yuanjie.springboot.controller;
+package com.yuanjie.springboot.modules.controller;
 
-import com.yuanjie.springboot.common.HttpResult;
-import com.yuanjie.springboot.properties.StudentProperties;
-import com.yuanjie.springboot.vo.LoginVo;
+import com.yuanjie.springboot.modules.response.HttpResult;
+import com.yuanjie.springboot.common.properties.StudentProperties;
+import com.yuanjie.springboot.modules.vo.LoginVo;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 

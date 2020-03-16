@@ -1,4 +1,4 @@
-package com.yuanjie.springboot.filter;
+package com.yuanjie.springboot.common.filter;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

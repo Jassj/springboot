@@ -1,6 +1,6 @@
 package com.yuanjie.springboot.config;
 
-import com.yuanjie.springboot.filter.MyFilter;
+import com.yuanjie.springboot.common.filter.MyFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,6 +1,6 @@
 package com.yuanjie.springboot;
 
-import com.yuanjie.springboot.properties.StudentProperties;
+import com.yuanjie.springboot.common.properties.StudentProperties;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
