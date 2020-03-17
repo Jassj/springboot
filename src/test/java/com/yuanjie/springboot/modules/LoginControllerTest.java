@@ -1,13 +1,14 @@
-package com.yuanjie.springboot;
+package com.yuanjie.springboot.modules;
 
-import com.yuanjie.springboot.modules.controller.LoginController;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
@@ -17,13 +18,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
  * @author yuanjie 2020/03/12 16:29
  */
 @SpringBootTest
-public class LoginTest {
+public class LoginControllerTest {
+
+    @Autowired
+    private WebApplicationContext wac;
 
     private MockMvc mockMvc;
 
     @BeforeEach
     public void setUp() throws Exception {
-        mockMvc = MockMvcBuilders.standaloneSetup(new LoginController()).build();
+        mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
     @Test
@@ -37,7 +41,8 @@ public class LoginTest {
 
     @Test
     public void hello() throws Exception {
-        String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/hello"))
+        String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/hello")
+                .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andReturn().getResponse().getContentAsString();
         System.out.println("result : "+responseString);
     }

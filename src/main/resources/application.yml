@@ -4,6 +4,11 @@ server:
   servlet:
     context-path: /springboot #应用的上下文路径、项目路径, 默认/
 
+#spring configuration
+spring:
+  profiles:
+    active: @activatedProperties@ # 加载application-xxx.xml文件
+
 #customized properties
 student:
   name: 曜
@@ -20,11 +25,6 @@ student:
   skills: #[编程, P图] #行内写法
     - 编程
     - P图
-#spring configuration
-spring:
-  profiles:
-    active: @activatedProperties@ # 加载application-xxx.xml文件
-
 
 #打开springboot debug日志
 #debug: true
