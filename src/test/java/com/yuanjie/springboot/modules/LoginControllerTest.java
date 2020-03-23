@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
  * @author yuanjie 2020/03/12 16:29
  */
 @SpringBootTest
-public class LoginControllerTest {
+class LoginControllerTest {
 
     @Autowired
     private WebApplicationContext wac;
@@ -26,12 +26,12 @@ public class LoginControllerTest {
     private MockMvc mockMvc;
 
     @BeforeEach
-    public void setUp() throws Exception {
+    void setUp() {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
     }
 
     @Test
-    public void login() throws Exception {
+    void login() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/login")
                 .param("username", "1")
                 .param("password", "2")
@@ -40,7 +40,7 @@ public class LoginControllerTest {
     }
 
     @Test
-    public void hello() throws Exception {
+    void hello() throws Exception {
         String responseString = mockMvc.perform(MockMvcRequestBuilders.get("/hello")
                 .accept(MediaType.APPLICATION_JSON_UTF8))
                 .andReturn().getResponse().getContentAsString();

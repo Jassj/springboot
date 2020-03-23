@@ -7,14 +7,14 @@ server:
 #spring configuration
 spring:
   profiles:
-    active: @activatedProperties@ # 加载application-xxx.xml文件
+    active: @activatedProperties@ #加载application-xxx.xml文件
 
 #customized properties
 student:
   name: 曜
   age: 20
   sex: true
-  birthday: 1996/07/25 # yyyy/MM/dd
+  birthday: 1996/07/25 #yyyy/MM/dd
   location: #{province: jiangsu, city: suzhou} #行内写法
     province: 江苏
     city: 苏州

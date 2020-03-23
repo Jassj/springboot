@@ -12,11 +12,11 @@ import org.springframework.web.context.WebApplicationContext;
 
 /**
  * description
- * 消息相关业务测试类 Todo get无法获取信息,是否与ConcurrentHashMap有关
+ * 消息相关业务测试类
  * @author yuanjie 2020/03/17 17:58
  */
 @SpringBootTest
-public class MessageControllerTest {
+class MessageControllerTest {
 
     @Autowired
     private WebApplicationContext wac;
@@ -24,13 +24,14 @@ public class MessageControllerTest {
     private MockMvc mockMvc;
 
     @BeforeEach
-    public void setUp() throws Exception {
+    void setUp() throws Exception {
         mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
+        saveMessages();
     }
 
     @RepeatedTest(5) // 重复执行5次
-    @Order(1) // 执行顺序, 数字越小优先级越高
-    public void saveMessage() throws Exception {
+//    @Order(1) // 执行顺序, 数字越小优先级越高
+    void saveMessages() throws Exception {
         final MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("text", "hello world, i'm coming!");
         params.add("summary", "hello");
@@ -40,31 +41,28 @@ public class MessageControllerTest {
     }
 
     @Test
-    @Order(4)
-    public void getMessages() throws Exception {
+    void getMessages() throws Exception {
         String mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/message"))
                 .andReturn().getResponse().getContentAsString();
         System.out.println("Result === " + mvcResult);
     }
 
     @Test
-    @Order(3)
-    public void delMessage() throws Exception {
+    void delMessage() throws Exception {
         String mvcResult = mockMvc.perform(MockMvcRequestBuilders.delete("/message/1"))
                 .andReturn().getResponse().getContentAsString();
         System.out.println("Result === " + mvcResult);
     }
 
     @Test
-    @Order(2)
-    public void getMessageById() throws Exception {
+    void getMessageById() throws Exception {
         String mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/message/1"))
                 .andReturn().getResponse().getContentAsString();
         System.out.println("Result === " + mvcResult);
     }
 
     @Test
-    public void modifyMessage() throws Exception {
+    void modifyMessage() throws Exception {
         final MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("id", "1");
         params.add("text", "hello world, i'm back!");
@@ -75,7 +73,7 @@ public class MessageControllerTest {
     }
 
     @Test
-    public void modifyPartMessage() throws Exception {
+    void modifyPartMessage() throws Exception {
         final MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         params.add("id", "1");
         params.add("text", "hello world, i'm ready!");
