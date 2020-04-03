@@ -35,7 +35,7 @@ public class SwaggerConfig {
                 .apis(predicate)
                 // 这里设置api 生成的范围，有两种方式:
                 // 1.上面通过自定义过滤规则
-                // 2,通过定义需要生成API的包路径
+                // 2.通过定义需要生成API的包路径
                 //.apis(RequestHandlerSelectors.basePackage(SWAGGER_SCAN_BASE_PACKAGE))
                 .build();
     }

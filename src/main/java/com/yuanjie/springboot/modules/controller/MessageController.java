@@ -57,6 +57,12 @@ public class MessageController {
 
     // 更新消息的text字段
     @PatchMapping(value = "/message/text")
+    @ApiOperation(value = "更新消息", notes = "更新指定消息的text字段")
+    @ApiImplicitParams({
+            @ApiImplicitParam(paramType = "query", name = "id", value = "消息ID", required = true, dataType = "Long"),
+            @ApiImplicitParam(paramType = "query", name = "text", value = "正文", required = true, dataType = "String"),
+            @ApiImplicitParam(paramType = "query", name = "summary", value = "摘要", dataType = "String"),
+    })
     public BaseResult<Message> patch(Message message) {
         Message messageResult = messageRepository.updateText(message);
         return BaseResult.successWithData(messageResult);
