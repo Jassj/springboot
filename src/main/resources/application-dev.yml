@@ -11,3 +11,7 @@ spring:
     show-sql: true   #Show or not log for each sql query
     hibernate:       #Hibernate ddl auto(create, create-drop, update)
       ddl-auto: update
+
+# mybatis指明映射类的包路径
+mybatis:
+  type-aliases-package: com.yuanjie.springboot.modules.mapper

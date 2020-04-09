@@ -11,7 +11,6 @@ import java.util.List;
  * 用户映射类
  * @author yuanjie 2020/04/08 20:21
  */
-@Mapper
 @Repository
 public interface UserMapper {
     @Delete("delete from test_user where userId = #{id}")

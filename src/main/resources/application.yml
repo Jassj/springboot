@@ -26,9 +26,5 @@ student:
     - 编程
     - P图
 
-# mybatis指明映射类的包路径
-mybatis:
-  type-aliases-package: com.yuanjie.springboot.modules.mapper
-
 #打开springboot debug日志
 #debug: true

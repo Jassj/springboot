@@ -28,4 +28,19 @@ public class UserEntityTest {
         }
     }
 
+    @Test
+    void deleteUserById() {
+        userMapper.delete(1L);
+    }
+
+    @Test
+    void createUser() {
+        User user = new User();
+        user.setUserId(1L);
+        user.setPassword("123456");
+        user.setUserName("lemon");
+        user.setAge(23);
+        userMapper.insert(user);
+    }
+
 }

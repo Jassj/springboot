@@ -5,7 +5,8 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * description
- * 数据源、工厂、模板配置类: 可支持多数据源配置
+ * 数据源、工厂、模板配置类
+ * 使用多数据源时: 复制此类配置, 指定数据源、sql工厂和sql模板
  * @author yuanjie 2020/04/08 20:16
  */
 @Configuration
