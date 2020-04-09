@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicLong;
  * @author yuanjie 2020/03/17 17:39
  */
 @Service("messageRepository")
-public class InMemoryMessageRepository implements MessageRepository {
+public class IMemoryMessageRepository implements MessageRepository {
     private static AtomicLong counter = new AtomicLong();
     private final ConcurrentMap<Long, Message> messages = new ConcurrentHashMap<>();
 

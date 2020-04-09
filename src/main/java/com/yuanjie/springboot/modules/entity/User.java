@@ -1,5 +1,6 @@
 package com.yuanjie.springboot.modules.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -9,17 +10,21 @@ import javax.persistence.Table;
  * @author yuanjie 2020/03/09 15:54t
  */
 @Entity // User进行持久化
+@Table(name = "test_user")
 public class User {
     @Id // 声明主键
-    private String userId;
+    @Column(name = "USERID", nullable = false, length = 20)
+    private Long userId;
+    @Column(name = "USERNAME", nullable = false, length = 50)
     private String userName;
     private String password;
+    private int age;
 
-    public String getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -38,4 +43,13 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
 }
