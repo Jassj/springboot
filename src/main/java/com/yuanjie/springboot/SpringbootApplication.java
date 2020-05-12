@@ -3,6 +3,7 @@ package com.yuanjie.springboot;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.*;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.core.io.support.SpringFactoriesLoader;
@@ -23,8 +24,9 @@ import org.springframework.core.io.support.SpringFactoriesLoader;
  *     根据{@link Conditional @Conditional} springboot根据每个类的条件选择什么情况下进行装配，并包括装配的顺序
  * 3.{@link ComponentScan @ComponentScan} 一般与@Configuration一起使用。指定Spring扫描注解的package，如果没有指定包，那么默认会扫描此配置类所在的package
  * @author yuanjie 2020/3/11 0011
+ * 4.exclude={DataSourceAutoConfiguration.class} 显示禁止spring boot自动配置数据源
  */
-@SpringBootApplication
+@SpringBootApplication(exclude={DataSourceAutoConfiguration.class})
 public class SpringbootApplication {
 
     public static void main(String[] args) {

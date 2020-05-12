@@ -1,6 +1,9 @@
 package com.yuanjie.springboot.config;
 
+import com.yuanjie.springboot.common.ESClient;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -10,7 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * @author yuanjie 2020/04/08 20:16
  */
 @Configuration
-@MapperScan(basePackages = "com.yuanjie.springboot.modules.mapper"/*, sqlSessionFactoryRef = "sqlSessionTemplate"*/)
+//@MapperScan(basePackages = "com.yuanjie.springboot.modules.mapper"/*, sqlSessionFactoryRef = "sqlSessionTemplate"*/)
 public class DataSourceConfig {
 
 //    @Bean(name = "testDataSource")
@@ -32,4 +35,16 @@ public class DataSourceConfig {
 //            (@Qualifier("sqlSessionFactory") SqlSessionFactory sqlSessionFactory) throws Exception {
 //        return new SqlSessionTemplate(sqlSessionFactory);
 //    }
+
+    @Value("${es.host}")
+    private String esHost;
+
+    @Value("${es.cluster}")
+    private String esCluster;
+
+    @Bean
+    public ESClient esClient() {
+        return new ESClient(esHost, esCluster);
+    }
+
 }

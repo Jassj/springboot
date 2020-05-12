@@ -28,3 +28,9 @@ student:
 
 #打开springboot debug日志
 #debug: true
+
+####--------------------------------------------------
+### ES Config
+es:
+  cluster: my-application
+  host: 127.0.0.1:9300
