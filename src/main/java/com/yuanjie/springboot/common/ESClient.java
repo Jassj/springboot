@@ -5,11 +5,11 @@ import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
-import org.elasticsearch.common.transport.InetSocketTransportAddress;
-import org.elasticsearch.plugin.deletebyquery.DeleteByQueryPlugin;
+import org.elasticsearch.common.transport.TransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
 
-import java.net.InetSocketAddress;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 public class ESClient {
 
@@ -58,14 +58,16 @@ public class ESClient {
         this.host = host;
         Settings settings = Settings.builder().put("cluster.name", cluster).build();
         String[] hostArray = StringUtils.split(host, ";");
-        InetSocketTransportAddress addresses[] = new InetSocketTransportAddress[hostArray.length];
         HttpHost[] hostArr = new HttpHost[hostArray.length];
         for (int i = 0; i < hostArray.length; i++) {
             String[] info = StringUtils.split(hostArray[i], ":");
-            addresses[i] = new InetSocketTransportAddress(new InetSocketAddress((info[0].trim()), Integer.parseInt(info[1].trim())));
             hostArr[i] = new HttpHost(info[0].trim(), Integer.parseInt(info[1].trim()) - 100, "http");
         }
-        client = new PreBuiltTransportClient(settings).addTransportAddresses(addresses);
+        try {
+            client = new PreBuiltTransportClient(settings).addTransportAddresses(new TransportAddress(InetAddress.getByName("127.0.0.1"), 9300));
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
         restClient = RestClient.builder(hostArr).build();
     }
 

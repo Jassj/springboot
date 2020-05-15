@@ -5,9 +5,9 @@ server:
     context-path: /springboot #应用的上下文路径、项目路径, 默认/
 
 #spring configuration
-spring:
-  profiles:
-    active: @activatedProperties@ #加载application-xxx.xml文件
+#spring:
+#  profiles:
+#    active: @activatedProperties@ #加载application-xxx.xml文件
 
 #customized properties
 student:
