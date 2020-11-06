@@ -12,7 +12,7 @@ import java.util.Map;
  * description: 自定义配置信息类
  * 使用注释处理器生成自己的元数据使用spring-boot-configuration-processor从带有@ConfigurationProperties
  * 注释的项目中轻松生成自己的配置元数据文件,该jar包含一个Java注释处理器，在项目被编译时会被调用
- * @author yuanjie 2020/03/04 19:27
+ * @author yuanjie 2020/11/06
  */
 @Component
 @ConfigurationProperties(prefix = "student")

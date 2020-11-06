@@ -6,7 +6,7 @@ import java.io.IOException;
 
 /**
  * description: 自定义过滤器
- * @author yuanjie 2020/03/13 16:01
+ * @author yuanjie 2020/11/06
  */
 // @WebFilter web请求过滤器注解，但是无法配置过滤器顺序
 public class MyFilter implements Filter {

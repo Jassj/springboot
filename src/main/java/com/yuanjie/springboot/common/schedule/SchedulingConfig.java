@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 /**
  * description:
  * 定时任务配置类
- * @author yuanjie 2020/03/09 16:31
+ * @author yuanjie 2020/11/06
  */
 @Configuration
 @EnableScheduling
