@@ -1,6 +1,10 @@
 package com.yuanjie.springboot.modules.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 景区资源表
@@ -12,22 +16,25 @@ public class SceneryResource {
     /**
      * 景区id
      */
+    @JSONField(name = "scenery_id")
     Integer sceneryId;
 
     /**
      * 景区名称
      */
+    @JSONField(name = "scenery_name")
     String sceneryName;
 
     /**
      * 景区图片
      */
+    @JSONField(name = "scenery_image_url")
     String imageUrl;
 
     /**
      * 景区所属城市id
      */
-    Integer cityId;
+    Long cityId;
 
     /**
      * 景区所属城市名称
@@ -38,5 +45,10 @@ public class SceneryResource {
      * 最低价格
      */
     Double lowestPrice;
+
+    /**
+     * 景区附近酒店
+     */
+    List<HotelResource> hotelResourceList = new ArrayList<>();
 
 }
