@@ -16,7 +16,7 @@ public class HotelResource {
     /**
      * 酒店id
      */
-
+    @JSONField(name = "hotel_id")
     Integer hotelId;
 
     /**

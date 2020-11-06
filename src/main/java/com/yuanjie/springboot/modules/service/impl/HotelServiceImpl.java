@@ -1,5 +1,6 @@
 package com.yuanjie.springboot.modules.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.yuanjie.springboot.modules.entity.HotelResource;
 import com.yuanjie.springboot.modules.mapper.HotelMapper;
 import com.yuanjie.springboot.modules.service.IHotelService;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class HotelServiceImpl implements IHotelService {
@@ -15,8 +17,9 @@ public class HotelServiceImpl implements IHotelService {
     HotelMapper hotelMapper;
 
     @Override
-    public List<HotelResource> getHotelBySceneryId(List<String> sceneryIds) {
-        return hotelMapper.getHotelBySceneryId(sceneryIds);
+    public List<HotelResource> getHotelById(List<Integer> hotelIds) {
+        List<JSONObject> list = hotelMapper.getHotelById(hotelIds);
+        return list.stream().map(json -> json.toJavaObject(HotelResource.class)).collect(Collectors.toList());
     }
 
 }
