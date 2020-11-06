@@ -8,6 +8,7 @@ import com.yuanjie.springboot.modules.service.ISceneryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -34,6 +35,13 @@ public class SceneryServiceImpl implements ISceneryService {
                 resource.getHotelResourceList().add(hotelResource);
             }
         });
+        // 根据sort_id排序并保留前20条数据
+        sceneryResources = sceneryResources.stream().map(sceneryResource -> {
+            List<HotelResource> newHotelResources =  sceneryResource.getHotelResourceList().stream().sorted(Comparator.comparing(HotelResource::getSortId))
+            .limit(20).collect(Collectors.toList());
+            sceneryResource.setHotelResourceList(newHotelResources);
+            return sceneryResource;
+        }).collect(Collectors.toList());
         return sceneryResources;
     }
 

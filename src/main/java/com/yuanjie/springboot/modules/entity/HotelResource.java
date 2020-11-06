@@ -1,10 +1,7 @@
 package com.yuanjie.springboot.modules.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.yuanjie.springboot.common.enums.HotelChain;
 import lombok.Data;
-
-import java.time.LocalDateTime;
 
 /**
  * 酒店资源表
@@ -31,46 +28,18 @@ public class HotelResource {
     @JSONField(name = "hotel_image_url")
     String imageUrl;
 
-//    /**
-//     * 酒店所属城市id
-//     */
-//    Integer cityId;
-//
-//    /**
-//     * 酒店所属城市名称
-//     */
-//    String cityName;
-
-    /**
-     * 酒店星级
-     */
-    @JSONField(name = "hotel_star")
-    Integer star;
-
-    /**
-     * 开店时间
-     */
-    LocalDateTime openTime;
-
-    /**
-     * 最近一次装修时间
-     */
-    LocalDateTime fixTime;
-
-    /**
-     * 酒店连锁
-     */
-    HotelChain hotelChain;
-
     /**
      * 景区id
      */
     @JSONField(name = "scenery_id")
     Integer sceneryId;
 
-//    /**
-//     * 间距(KM)
-//     */
-//    Double distance;
+    // Todo 酒店点评数, 满意度, 起价
+
+    /**
+     * 排序id(按照正序展示)
+     */
+    @JSONField(name = "sort_id")
+    Integer sortId;
 
 }

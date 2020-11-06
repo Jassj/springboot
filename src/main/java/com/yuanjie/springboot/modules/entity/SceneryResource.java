@@ -31,20 +31,29 @@ public class SceneryResource {
     @JSONField(name = "scenery_image_url")
     String imageUrl;
 
-    /**
-     * 景区所属城市id
-     */
-    Long cityId;
-
-    /**
-     * 景区所属城市名称
-     */
-    String cityName;
+//    /**
+//     * 景区所属城市id
+//     */
+//    Long cityId;
+//
+//    /**
+//     * 景区所属城市名称
+//     */
+//    String cityName;
 
     /**
      * 最低价格
      */
-    Double lowestPrice;
+    @JSONField(name = "lowest_price")
+    Integer lowestPrice;
+
+    /**
+     * 景区等级
+     */
+    @JSONField(name = "level")
+    Integer level;
+
+    // Todo 景区点评数, 景区满意度,
 
     /**
      * 景区附近酒店
