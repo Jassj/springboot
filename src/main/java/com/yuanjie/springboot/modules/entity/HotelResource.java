@@ -34,7 +34,23 @@ public class HotelResource {
     @JSONField(name = "scenery_id")
     Integer sceneryId;
 
-    // Todo 酒店点评数, 满意度, 起价
+    /**
+     * 最低价格
+     */
+    @JSONField(name = "hotel_lowest_price")
+    Integer lowestPrice;
+
+    /**
+     * 点评数
+     */
+    @JSONField(name = "hotel_comment_count")
+    Integer commentCount;
+
+    /**
+     * 满意度
+     */
+    @JSONField(name = "hotel_satisfaction")
+    String satisfaction;
 
     /**
      * 排序id(按照正序展示)

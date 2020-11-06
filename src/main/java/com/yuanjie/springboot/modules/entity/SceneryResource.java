@@ -53,7 +53,17 @@ public class SceneryResource {
     @JSONField(name = "level")
     Integer level;
 
-    // Todo 景区点评数, 景区满意度,
+    /**
+     * 点评数
+     */
+    @JSONField(name = "comment_count")
+    Integer commentCount;
+
+    /**
+     * 满意度
+     */
+    @JSONField(name = "satisfaction")
+    String satisfaction;
 
     /**
      * 景区附近酒店

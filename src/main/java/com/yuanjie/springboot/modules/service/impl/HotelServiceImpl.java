@@ -19,6 +19,7 @@ public class HotelServiceImpl implements IHotelService {
     @Override
     public List<HotelResource> getHotelById(List<Integer> hotelIds) {
         List<JSONObject> list = hotelMapper.getHotelById(hotelIds);
+        // Todo 酒店资源详情: 床型图, 预测得分, 酒店详情
         return list.stream().map(json -> json.toJavaObject(HotelResource.class)).collect(Collectors.toList());
     }
 
