@@ -3,6 +3,9 @@ package com.yuanjie.springboot.modules.entity;
 import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
+import java.math.BigDecimal;
+import java.util.Objects;
+
 /**
  * 酒店资源详情表
  * @author yuanjie 2020/11/06
@@ -15,6 +18,12 @@ public class HotelResourceDetail {
      */
     @JSONField(name = "hotel_id")
     Integer hotelId;
+
+    /**
+     * 酒店id
+     */
+    @JSONField(name = "hotel_name")
+    Integer hotelName;
 
     /**
      * 房型图片
@@ -112,10 +121,27 @@ public class HotelResourceDetail {
     Double score;
 
     /**
-     * 各项指标打分
+     * 各项指标打分:
      */
     public void getSummaryScore() {
-        score = 1/(1+Math.exp((star + oldNew + ifChain + sord6 + enr + prc + svr + voc + dcr + trs + sty + sts + dif + oth) * (-0.3)));
+        // 未选择打分为null的指标值置为默认值1
+        Integer star = Objects.nonNull(this.star) ? this.star : 1;
+        Double oldNew = Objects.nonNull(this.oldNew) ? this.oldNew : 1.0;
+        Integer ifChain = Objects.nonNull(this.ifChain) ? this.ifChain : 1;
+        Double sord6 = Objects.nonNull(this.sord6) ? this.sord6 : 1.0;
+        Double enr = Objects.nonNull(this.enr) ? this.enr : 1.0;
+        Double prc = Objects.nonNull(this.prc) ? this.prc : 1.0;
+        Double svr = Objects.nonNull(this.svr) ? this.svr : 1.0;
+        Double voc = Objects.nonNull(this.voc) ? this.voc : 1.0;
+        Double dcr = Objects.nonNull(this.dcr) ? this.dcr : 1.0;
+        Double trs = Objects.nonNull(this.trs) ? this.trs : 1.0;
+        Double sty = Objects.nonNull(this.sty) ? this.sty : 1.0;
+        Double sts = Objects.nonNull(this.sts) ? this.sts : 1.0;
+        Double dif = Objects.nonNull(this.dif) ? this.dif : 1.0;
+        Double oth = Objects.nonNull(this.oth) ? this.oth : 1.0;
+        Double score = 1/(1+Math.exp((star + oldNew + ifChain + sord6 + enr + prc + svr + voc + dcr + trs + sty + sts + dif + oth) * (-0.3)));
+        BigDecimal bg = new BigDecimal(score);
+        this.score = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
 }

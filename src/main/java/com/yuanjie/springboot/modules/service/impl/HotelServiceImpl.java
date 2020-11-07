@@ -1,5 +1,6 @@
 package com.yuanjie.springboot.modules.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.yuanjie.springboot.modules.entity.HotelResourceDetail;
 import com.yuanjie.springboot.modules.mapper.HotelMapper;
@@ -38,13 +39,13 @@ public class HotelServiceImpl implements IHotelService {
     HotelMapper hotelMapper;
 
     @Override
-    public List<HotelResourceDetail> getHotelById(List<Integer> hotelIds) {
+    public List<JSONObject> getHotelById(List<Integer> hotelIds) {
         List<JSONObject> list = hotelMapper.getHotelById(hotelIds);
         return list.stream().map(json -> {
             HotelResourceDetail detail = json.toJavaObject(HotelResourceDetail.class);
             detail.getSummaryScore();
             return detail;
-        }).collect(Collectors.toList());
+        }).map(detail -> JSONObject.parseObject(JSON.toJSONString(detail))).collect(Collectors.toList());
     }
 
     @Override
@@ -53,10 +54,13 @@ public class HotelServiceImpl implements IHotelService {
     }
 
     @Override
-    public List<HotelResourceDetail> score(List<JSONObject> hotelDimensions) {
-//        hotelDimensions
+    public List<JSONObject> score(List<JSONObject> hotelDimensions) {
         // 两个酒店指标数据进行打分并输出结果
-        return null;
+        return hotelDimensions.stream().map(json -> {
+            HotelResourceDetail detail = json.toJavaObject(HotelResourceDetail.class);
+            detail.getSummaryScore();
+            return detail;
+        }).map(detail -> JSONObject.parseObject(JSON.toJSONString(detail))).collect(Collectors.toList());
     }
 
 }
