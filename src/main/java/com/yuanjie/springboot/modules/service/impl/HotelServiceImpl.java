@@ -18,7 +18,7 @@ public class HotelServiceImpl implements IHotelService {
 
     private static final Map<String, String> DIMENSIONS = new HashMap<String, String>() {
         {
-            put("class_fk", "酒店星级");
+//            put("class_fk", "酒店星级");
             put("old_new", "酒店新旧");
             put("if_chain", "是否连锁");
             put("sord_1112", "11,12月份销量");

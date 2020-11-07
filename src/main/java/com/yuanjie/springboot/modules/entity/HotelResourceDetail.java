@@ -20,10 +20,10 @@ public class HotelResourceDetail {
     Integer hotelId;
 
     /**
-     * 酒店id
+     * 酒店名称
      */
     @JSONField(name = "hotel_name")
-    Integer hotelName;
+    String hotelName;
 
     /**
      * 房型图片
@@ -31,11 +31,11 @@ public class HotelResourceDetail {
     @JSONField(name = "room_image_url")
     String roomImageUrl;
 
-    /**
-     * 酒店星级
-     */
-    @JSONField(name = "class_fk")
-    Integer star;
+//    /**
+//     * 酒店星级
+//     */
+//    @JSONField(name = "class_fk")
+//    Integer star;
 
     /**
      * 酒店折旧度
@@ -125,7 +125,7 @@ public class HotelResourceDetail {
      */
     public void getSummaryScore() {
         // 未选择打分为null的指标值置为默认值1
-        Integer star = Objects.nonNull(this.star) ? this.star : 1;
+//        Integer star = Objects.nonNull(this.star) ? this.star : 1;
         Double oldNew = Objects.nonNull(this.oldNew) ? this.oldNew : 1.0;
         Integer ifChain = Objects.nonNull(this.ifChain) ? this.ifChain : 1;
         Double sord6 = Objects.nonNull(this.sord6) ? this.sord6 : 1.0;
@@ -139,7 +139,7 @@ public class HotelResourceDetail {
         Double sts = Objects.nonNull(this.sts) ? this.sts : 1.0;
         Double dif = Objects.nonNull(this.dif) ? this.dif : 1.0;
         Double oth = Objects.nonNull(this.oth) ? this.oth : 1.0;
-        Double score = 1/(1+Math.exp((star + oldNew + ifChain + sord6 + enr + prc + svr + voc + dcr + trs + sty + sts + dif + oth) * (-0.3)));
+        Double score = 1/(1+Math.exp((/*star + */oldNew + ifChain + sord6 + enr + prc + svr + voc + dcr + trs + sty + sts + dif + oth) * (-0.3)));
         BigDecimal bg = new BigDecimal(score);
         this.score = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
