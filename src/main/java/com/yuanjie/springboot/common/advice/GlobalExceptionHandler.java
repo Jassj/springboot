@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
  * 全局异常捕获类，可捕获程序中抛出的指定类型异常
  * @author yuanjie 2020/11/06
  */
-@ControllerAdvice
+//@ControllerAdvice
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
 //        }
 
         e.printStackTrace();
-        System.out.println("GlobalDefaultExceptionHandler.defaultErrorHandler()");
+//        System.out.println("GlobalDefaultExceptionHandler.defaultErrorHandler()");
 
         // 返回Json或者String数据等响应体, 使用@ResponseBody注解修饰
 

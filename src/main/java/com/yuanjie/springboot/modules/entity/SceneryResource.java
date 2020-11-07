@@ -31,16 +31,6 @@ public class SceneryResource {
     @JSONField(name = "scenery_image_url")
     String imageUrl;
 
-//    /**
-//     * 景区所属城市id
-//     */
-//    Long cityId;
-//
-//    /**
-//     * 景区所属城市名称
-//     */
-//    String cityName;
-
     /**
      * 最低价格
      */
@@ -52,6 +42,11 @@ public class SceneryResource {
      */
     @JSONField(name = "level")
     Integer level;
+
+    /**
+     * 景区等级A
+     */
+    String levelLabel;
 
     /**
      * 点评数
@@ -69,5 +64,17 @@ public class SceneryResource {
      * 景区附近酒店
      */
     List<HotelResource> hotelResourceList = new ArrayList<>();
+
+    /**
+     * 根据level拼AAAA
+     */
+    public void setLevelLabel() {
+        StringBuilder levelLabel = new StringBuilder();
+        Integer level = this.level;
+        for(;level > 0; level--) {
+            levelLabel.append("A");
+        }
+        this.levelLabel = levelLabel.toString();
+    }
 
 }

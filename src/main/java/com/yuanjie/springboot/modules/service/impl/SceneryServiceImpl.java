@@ -35,13 +35,12 @@ public class SceneryServiceImpl implements ISceneryService {
                 resource.getHotelResourceList().add(hotelResource);
             }
         });
-        // 根据sort_id排序并保留前20条数据
-        sceneryResources = sceneryResources.stream().map(sceneryResource -> {
+        // 根据sort_id排序并保留前10条数据
+        sceneryResources = sceneryResources.stream().peek(sceneryResource -> {
+            sceneryResource.setLevelLabel();
             List<HotelResource> newHotelResources =  sceneryResource.getHotelResourceList().stream().sorted(Comparator.comparing(HotelResource::getSortId))
-            .limit(20).collect(Collectors.toList());
-            sceneryResource.setHotelResourceList(newHotelResources);
-            return sceneryResource;
-        }).collect(Collectors.toList());
+            .limit(10).collect(Collectors.toList());
+            sceneryResource.setHotelResourceList(newHotelResources);}).collect(Collectors.toList());
         return sceneryResources;
     }
 

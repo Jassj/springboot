@@ -20,6 +20,7 @@ public interface SceneryMapper {
             "shm.hotel_id, shm.hotel_name as hotel_name,\n" +
             "shm.sort_id as sort_id,\n" +
             "shm.image_url as hotel_image_url,\n" +
+            "shm.room_image_url as room_image_url,\n" +
             "shm.lowest_price as hotel_lowest_price,\n" +
             "shm.comment_count as hotel_comment_count,\n" +
             "shm.satisfaction as hotel_satisfaction\n" +

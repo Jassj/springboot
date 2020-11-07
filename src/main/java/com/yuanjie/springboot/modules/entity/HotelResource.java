@@ -26,7 +26,13 @@ public class HotelResource {
      * 酒店图片
      */
     @JSONField(name = "hotel_image_url")
-    String imageUrl;
+    String hotelImageUrl;
+
+    /**
+     * 酒店房型图片
+     */
+    @JSONField(name = "room_image_url")
+    String roomImageUrl;
 
     /**
      * 景区id

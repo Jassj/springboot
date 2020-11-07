@@ -15,7 +15,7 @@ import java.util.List;
 public interface HotelMapper {
 
     @Select({"<script>" +
-            "select hotel_id, hotel_name, image_url as hotel_image_url from hotel_resource where hotel_id in " +
+            "select * from hotel_resource_detail where hotel_id in " +
             "<foreach collection=\"hotelIds\" index = \"index\" item = \"hotel_id\" open= \"(\" separator=\",\" close=\")\"> " +
             "#{hotel_id} </foreach>" +
             "</script>"})
