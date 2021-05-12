@@ -34,3 +34,114 @@ student:
 es:
   cluster: my-application
   host: 127.0.0.1:9300
+
+####--------------------------------------------------
+# spring boot actuator 系统监控框架
+management:
+  endpoint:
+    health:
+      show-details: always  #显示健康具体信息  默认不会显示详细信息
+  server:
+    port: 8088 # 监控系统的端口号
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# 健康检查
+management.health.circuitbreakers.enabled: true
+
+### Resilience4j Config
+resilience4j.circuitbreaker:
+  instances:
+    backendA:
+      failureRateThreshold: 50    # 调用异常的请求比例
+      slowCallRateThreshold: 50   # 慢调用的请求比例
+      waitDurationInOpenState: 10000 # 断路器从开启过渡到半开应等待的时间
+      slowCallDurationThreshold: 1000 # 慢调用的请求阈值(毫秒)
+      permittedNumberOfCallsInHalfOpenState: 3 # 断路器半开状态(开启状态经过一段时间 -> 半开, 请求放行尝试调用后端服务)下允许通过的调用次数
+      minimumNumberOfCalls: 10 # 断路器计算失败率或慢调用率之前所需的最小调用数(满足最小值的条件后才会基于断路配置进行判断)
+      slidingWindowType: COUNT_BASED # 滑动窗口的类型(基于数量 | 基于时间)
+      slidingWindowSize: 500 # 滑动窗口的大小(数量: 次 | 时间: 秒)
+      recordExceptions:
+        - java.lang.Exception
+      ignoreExceptions:
+        - java.lang.IndexOutOfBoundsException
+      registerHealthIndicator: true
+#    backendB:
+#      registerHealthIndicator: true
+#      slidingWindowSize: 10
+#      permittedNumberOfCallsInHalfOpenState: 3
+#      slidingWindowType: TIME_BASED
+#      minimumNumberOfCalls: 20
+#      waitDurationInOpenState: 50s
+#      failureRateThreshold: 50
+#      eventConsumerBufferSize: 10
+#      recordFailurePredicate: io.github.robwin.exception.RecordFailurePredicate
+
+#resilience4j.retry:
+#  instances:
+#    backendA:
+#      maxRetryAttempts: 3
+#      waitDuration: 10s
+#      enableExponentialBackoff: true
+#      exponentialBackoffMultiplier: 2
+#      retryExceptions:
+#        - org.springframework.web.client.HttpServerErrorException
+#        - java.io.IOException
+#      ignoreExceptions:
+#        - io.github.robwin.exception.BusinessException
+#    backendB:
+#      maxRetryAttempts: 3
+#      waitDuration: 10s
+#      retryExceptions:
+#        - org.springframework.web.client.HttpServerErrorException
+#        - java.io.IOException
+#      ignoreExceptions:
+#        - io.github.robwin.exception.BusinessException
+
+resilience4j.bulkhead:
+  instances:
+    backendA:
+      maxConcurrentCalls: 10 # 允许的最大并发量
+      maxWaitDuration: 500 # 线程最大的等待时间
+#    backendB:
+#      maxWaitDuration: 10ms
+#      maxConcurrentCalls: 20
+
+#resilience4j.thread-pool-bulkhead:
+#  instances:
+#    backendC:
+#      maxThreadPoolSize: 1
+#      coreThreadPoolSize: 1
+#      queueCapacity: 1
+
+#resilience4j.ratelimiter:
+#  instances:
+#    backendA:
+#      limitForPeriod: 10
+#      limitRefreshPeriod: 1s
+#      timeoutDuration: 0
+#      registerHealthIndicator: true
+#      eventConsumerBufferSize: 100
+#    backendB:
+#      limitForPeriod: 6
+#      limitRefreshPeriod: 500ms
+#      timeoutDuration: 3s
+
+#resilience4j.timelimiter:
+#  instances:
+#    backendA:
+#      timeoutDuration: 2s
+#      cancelRunningFuture: true
+#    backendB:
+#      timeoutDuration: 1s
+#      cancelRunningFuture: false
+
+# sentinel
+spring:
+  cloud:
+    sentinel:
+      transport:
+        port: 8719
+        dashboard: localhost:8080
