@@ -18,6 +18,7 @@
         <java.version>1.8</java.version>
         <lombok.version>1.18.10</lombok.version>
         <resilience4j.version>1.7.0</resilience4j.version>
+        <sentinel.version>1.8.0</sentinel.version>
     </properties>
 
     <!-- ***************** dependencies settings **************************** -->
@@ -139,21 +140,28 @@
         <dependency>
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-core</artifactId>
-            <version>1.8.0</version>
+            <version>${sentinel.version}</version>
         </dependency>
 
         <!-- sentinel aspectj -->
         <dependency>
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-annotation-aspectj</artifactId>
-            <version>1.8.0</version>
+            <version>${sentinel.version}</version>
         </dependency>
 
         <!-- sentinel dashboard -->
         <dependency>
             <groupId>com.alibaba.csp</groupId>
             <artifactId>sentinel-transport-simple-http</artifactId>
-            <version>1.8.0</version>
+            <version>${sentinel.version}</version>
+        </dependency>
+
+        <!-- sentinel parameter -->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-parameter-flow-control</artifactId>
+            <version>${sentinel.version}</version>
         </dependency>
 
         <!-- spring cloud sentinel -->

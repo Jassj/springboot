@@ -30,7 +30,7 @@ public class LoginController {
     // BindingResult 参数校验的结果会存储在此对象中，可以根据属性判断是否校验通过，校验不通过可以将错误信息打印出来。
     @PostMapping(value = "/login")
     @CircuitBreaker(name = "backendA", fallbackMethod = "fallback")
-    @Bulkhead(name = "backendA", type = Bulkhead.Type.SEMAPHORE) // 默认信号量隔离, 线程隔离适用于耗时较长的方法, 线程挂起 & 线程的上下文切换开销较大
+    @Bulkhead(name = "backendA", type = Bulkhead.Type.SEMAPHORE)
     public HttpResult login(@Valid @RequestBody LoginVo lv, BindingResult result) {
         if (result.hasErrors()) {
             throw new RuntimeException("参数校验不通过");

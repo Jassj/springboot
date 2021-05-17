@@ -7,11 +7,15 @@ import com.alibaba.csp.sentinel.slots.block.degrade.circuitbreaker.CircuitBreake
 import com.alibaba.csp.sentinel.slots.block.degrade.circuitbreaker.EventObserverRegistry;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
+import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowItem;
+import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowRule;
+import com.alibaba.csp.sentinel.slots.block.flow.param.ParamFlowRuleManager;
 import com.alibaba.csp.sentinel.util.TimeUtil;
 import org.springframework.context.annotation.Configuration;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -31,6 +35,7 @@ public class SentinelConfig {
     private void init() {
         initFlowRules();
         initDegradeRules();
+        initParamFlowRule();
     }
 
     /**
@@ -66,7 +71,7 @@ public class SentinelConfig {
     /**
      * 熔断降级添加监听器
      */
-    public void addObserver() {
+    private void addObserver() {
         EventObserverRegistry.getInstance().addStateChangeObserver("logging",
                 (prevState, newState, rule, snapshotValue) -> {
                     if (newState == CircuitBreaker.State.OPEN) {
@@ -78,6 +83,25 @@ public class SentinelConfig {
                                 TimeUtil.currentTimeMillis()));
                     }
                 });
+    }
+
+    /**
+     * 热点参数限流规则
+     */
+    private void initParamFlowRule() {
+        List<ParamFlowRule> rules = new ArrayList<>();
+        ParamFlowRule rule = new ParamFlowRule();
+        rule.setResource("test");
+        rule.setParamIdx(0).setCount(5);
+
+        // 针对 int 类型的参数, 单独设置限流 QPS
+        ParamFlowItem item = new ParamFlowItem().setObject(String.valueOf(1))
+                .setClassType(int.class.getName())
+                .setCount(1);
+        rule.setParamFlowItemList(Collections.singletonList(item));
+
+        rules.add(rule);
+        ParamFlowRuleManager.loadRules(rules);
     }
 
 }
