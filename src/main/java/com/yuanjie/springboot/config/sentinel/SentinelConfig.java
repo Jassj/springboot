@@ -1,6 +1,8 @@
 package com.yuanjie.springboot.config.sentinel;
 
 import com.alibaba.csp.sentinel.slots.block.RuleConstant;
+import com.alibaba.csp.sentinel.slots.block.authority.AuthorityRule;
+import com.alibaba.csp.sentinel.slots.block.authority.AuthorityRuleManager;
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRule;
 import com.alibaba.csp.sentinel.slots.block.degrade.DegradeRuleManager;
 import com.alibaba.csp.sentinel.slots.block.degrade.circuitbreaker.CircuitBreaker;
@@ -28,25 +30,52 @@ import java.util.List;
 @Configuration
 public class SentinelConfig {
 
+    private final static String RESOURCE_NAME = "test";
+
     /**
-     * 初始化加载限流配置: 可接统一配置 | 关系型数据库
+     * 初始化加载限流配置
      */
     @PostConstruct
     private void init() {
-        initFlowRules();
-        initDegradeRules();
-        initParamFlowRule();
+        // 流量控制
+//        initFlowRules1();
+//        initFlowRules2();
+        // 熔断降级
+//        initDegradeRules();
+        // 热点参数限流
+//        initParamFlowRule();
+        // 黑白名单 Todo
+        initWhiteRules();
+        initBlackRules();
     }
 
     /**
-     * 流量控制规则
+     * 流量控制规则: 直接限流
      */
-    private void initFlowRules() {
+    private void initFlowRules1() {
         List<FlowRule> rules = new ArrayList<>();
         FlowRule rule = new FlowRule();
-        rule.setResource("test");
+        rule.setResource(RESOURCE_NAME);
         rule.setGrade(RuleConstant.FLOW_GRADE_QPS);
         rule.setCount(1);
+        rules.add(rule);
+        FlowRuleManager.loadRules(rules);
+    }
+
+    /**
+     * 流量控制规则: 冷启动
+     */
+    private void initFlowRules2() {
+        List<FlowRule> rules = new ArrayList<>();
+        FlowRule rule = new FlowRule();
+        rule.setResource(RESOURCE_NAME);
+        rule.setGrade(RuleConstant.FLOW_GRADE_QPS);
+        rule.setCount(10);
+        // 默认不区分调用来源
+        rule.setLimitApp("default");
+        rule.setControlBehavior(RuleConstant.CONTROL_BEHAVIOR_WARM_UP);
+        // 期待系统进入稳定状态的时间(即预热时长)
+        rule.setWarmUpPeriodSec(10);
         rules.add(rule);
         FlowRuleManager.loadRules(rules);
     }
@@ -57,7 +86,7 @@ public class SentinelConfig {
     private void initDegradeRules() {
         List<DegradeRule> rules = new ArrayList<>();
         DegradeRule rule = new DegradeRule();
-        rule.setResource("test");
+        rule.setResource(RESOURCE_NAME);
         rule.setGrade(RuleConstant.DEGRADE_GRADE_EXCEPTION_RATIO);
         rule.setCount(0.5);
         rule.setTimeWindow(5);
@@ -91,8 +120,9 @@ public class SentinelConfig {
     private void initParamFlowRule() {
         List<ParamFlowRule> rules = new ArrayList<>();
         ParamFlowRule rule = new ParamFlowRule();
-        rule.setResource("test");
-        rule.setParamIdx(0).setCount(5);
+        rule.setResource(RESOURCE_NAME);
+        rule.setParamIdx(0).setCount(10);
+//        rule.setDurationInSec(10);
 
         // 针对 int 类型的参数, 单独设置限流 QPS
         ParamFlowItem item = new ParamFlowItem().setObject(String.valueOf(1))
@@ -102,6 +132,28 @@ public class SentinelConfig {
 
         rules.add(rule);
         ParamFlowRuleManager.loadRules(rules);
+    }
+
+    /**
+     * 白名单
+     */
+    private static void initWhiteRules() {
+        AuthorityRule rule = new AuthorityRule();
+        rule.setResource(RESOURCE_NAME);
+        rule.setStrategy(RuleConstant.AUTHORITY_WHITE);
+        rule.setLimitApp("appA,appE");
+        AuthorityRuleManager.loadRules(Collections.singletonList(rule));
+    }
+
+    /**
+     * 黑名单
+     */
+    private static void initBlackRules() {
+        AuthorityRule rule = new AuthorityRule();
+        rule.setResource(RESOURCE_NAME);
+        rule.setStrategy(RuleConstant.AUTHORITY_BLACK);
+        rule.setLimitApp("appA,appB");
+        AuthorityRuleManager.loadRules(Collections.singletonList(rule));
     }
 
 }
