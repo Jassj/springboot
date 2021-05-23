@@ -44,9 +44,9 @@ public class SentinelConfig {
 //        initDegradeRules();
         // 热点参数限流
 //        initParamFlowRule();
-        // 黑白名单 Todo
-        initWhiteRules();
-        initBlackRules();
+        // 黑白名单
+//        initWhiteRules();
+//        initBlackRules();
     }
 
     /**
@@ -141,7 +141,7 @@ public class SentinelConfig {
         AuthorityRule rule = new AuthorityRule();
         rule.setResource(RESOURCE_NAME);
         rule.setStrategy(RuleConstant.AUTHORITY_WHITE);
-        rule.setLimitApp("appA,appE");
+        rule.setLimitApp("test_token");
         AuthorityRuleManager.loadRules(Collections.singletonList(rule));
     }
 
@@ -152,7 +152,7 @@ public class SentinelConfig {
         AuthorityRule rule = new AuthorityRule();
         rule.setResource(RESOURCE_NAME);
         rule.setStrategy(RuleConstant.AUTHORITY_BLACK);
-        rule.setLimitApp("appA,appB");
+        rule.setLimitApp("test_token");
         AuthorityRuleManager.loadRules(Collections.singletonList(rule));
     }
 
