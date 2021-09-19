@@ -58,6 +58,7 @@ public class SentinelConfig {
         rule.setResource(RESOURCE_NAME);
         rule.setGrade(RuleConstant.FLOW_GRADE_QPS);
         rule.setCount(1);
+//        rule.setClusterMode(true);
         rules.add(rule);
         FlowRuleManager.loadRules(rules);
     }

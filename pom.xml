@@ -164,6 +164,12 @@
             <version>${sentinel.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-cluster-client-default</artifactId>
+            <version>${sentinel.version}</version>
+        </dependency>
+
         <!-- spring cloud sentinel -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
